@@ -4,8 +4,15 @@
 import csv
 
 def init():
-    csvReader = csv.reader(open('data.csv', 'rb'), delimiter=',')
-    print csvReader.line_num(1)
+    csvReader = csv.DictReader(open('data.csv', 'rb'), delimiter=',')
+    unic = []
+    for row in csvReader:
+        row2 = {}
+        for key, value in row.iteritems():
+            row2[unicode(key, 'utf-8')] = unicode(value,'utf-8')
+        unic.append(row2)
+
+    return unic
 
 #def project_count():
 
