@@ -1,0 +1,5 @@
+project_name,project_no,start_date,end_date,course_id,course_name,academic_credits,techniques_used,short_description,long_description,small_image,big_image,group_size,external_link,lulz_had
+"python data-module test script",1,2009-09-05,2009-09-06,TDP003,"OKÄNT","WUT?","python","no","no no no","X","XXX",2,"YY",many
+"NEJ",3,2009-09-07,2009-09-08,TDP003,"OKÄNT","WUT?","csv,python,c++","no","no no no","X","XXX",4,"YY",few
+2007,2,2009-09-08,2009-09-09,TDP003,"OKÄNT","WUT?","python,ada","no","no no no","X","XXX",6,"YY",medium
+",",4,2009-09-06,2009-09-07, ","HOHO","WUT?","","no","no no no","X","XXX",8,"YY",over 9000
