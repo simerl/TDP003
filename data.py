@@ -19,6 +19,8 @@ def init():
         unic[i]["project_no"] = int((unic[i]["project_no"]))
     for i in range(len(unic)):						#Does the same with group_size
         unic[i]["group_size"] = int((unic[i]["group_size"]))
+    for i in range(len(unic)):						#Converts techniques_used to list
+        unic[i]["techniques_used"] = (unic[i]["techniques_used"].split(','))
     errorcode = 0							#Changes the error code to "Ok"
     return unic								#Returns unic
     
@@ -34,13 +36,36 @@ def project_count():
 
 
 
-#def lookup_project():
+def lookup_project(a):
+    global unic
+    global errorcode
+    b=0
+    if a > len(unic) and len(unic) != 0:				#If statement to change the errorcode if the project doesn't exist in the database
+	errorcode = 2							#obs problem! om projekt 3 inte finns men det finns totalt 5 projekt ges fel errorcode
+	return errorcode
+    else:
+	for i in range(len(unic)):
+	     if a == unic[b]["project_no"]:
+		#errorcode = 0
+		return (errorcode, unic[b])
+		break
+             else:
+		b += 1
+    
+
+
+
+
+#for id in unic[i]["project_no"]:
+	#print "hej"
+    return errorcode
 
 
 #def retrieve_project():
 
 
 #def retrieve_techniques():
+
 
 
 #def retieve_techniques_stats():
