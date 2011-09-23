@@ -45,12 +45,12 @@ def lookup_project(a):
 	    return errorcode
     else:
 	for i in range(len(unic)):
-        if a == unic[b]["project_no"]:
-	    	#errorcode = 0
-	    	return (errorcode, unic[b])
-		    break
-        else:
-            b += 1
+		if a == unic[b]["project_no"]:
+	   		#errorcode = 0
+	   		return (errorcode, unic[b])
+			break
+   	    else:
+   	    	b += 1
 
 
 
