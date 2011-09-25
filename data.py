@@ -36,27 +36,18 @@ def project_count():
 
 
 
-def lookup_project(a):													#Måste ändra a till id, kanske
+def lookup_project(a):                                                  #Måste ändra a till id, kanske
     global unic
     global errorcode
-    b = 0
-    if a > len(unic) and len(unic) != 0:								#If statement to change the errorcode if the project doesn't exist in the database
-	    errorcode = 2							       					#obs problem! om projekt 3 inte finns men det finns totalt 5 projekt ges fel errorcode
-	    return errorcode
-    else:
-	for i in range(len(unic)):
-		if a == unic[b]["project_no"]:
-	   		#errorcode = 0
-			return (errorcode, unic[b])
-			break
-        else:
-            b += 1
-
-
+    for dic in unic:
+    	if a == dic['project_no']:
+			return (errorcode, dic)
+    return (2, None)
 
 def retrieve_project():#sort_by='start_date', sort_order='asc', techniques=None, search=None, search_fields=None):
 	global unic
 	global errorcode
+
 
 #def retrieve_techniques():
 
