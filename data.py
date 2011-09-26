@@ -20,15 +20,17 @@ def init():
     for i in range(len(unic)):						                    #Does the same with group_size
         unic[i]["group_size"] = int((unic[i]["group_size"]))
     for i in range(len(unic)):						                    #Converts techniques_used to list
-        unic[i]["techniques_used"] = (unic[i]["techniques_used"].split(','))
+        if len(unic[i]["techniques_used"]) > 0:                                                              
+            temp = unic[i]["techniques_used"]                           #OBS sortera    listorna"!!!!!
+            unic[i]["techniques_used"] = temp.split(',')
+        else:
+            unic[i]["techniques_used"] = []
     errorcode = 0							                            #Changes the error code to "Ok"
     return unic								                            #Returns unic
     
 									                                    #Possibe problem: the dict isn't correctly sorted, bad variable names
 
 def project_count():
-    global unic
-    global errorcode
     return (errorcode, len(unic))										#Returns the error code and the length of unic as a tuple
 
 
