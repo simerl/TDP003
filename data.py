@@ -21,11 +21,9 @@ def init():
             row2[unicode(key, 'utf-8')] = unicode(value,'utf-8')	    #Puts the current row in the dict and converts it to unicode
         unic.append(row2)						                        #Adds the dict to the list "unic"
 
-    for i in range(len(unic)):						                    #Converts project_no back from unicode string to integer
-        unic[i]["project_no"] = int((unic[i]["project_no"]))
-
-    for i in range(len(unic)):						                    #Does the same with group_size
-        unic[i]["group_size"] = int((unic[i]["group_size"]))
+    for i in range(len(unic)):						                   
+        unic[i]["project_no"] = int((unic[i]["project_no"]))            #Converts project_no back from unicode string to integer
+        unic[i]["group_size"] = int((unic[i]["group_size"]))            #Does the same with group_size
     
     for i in range(len(unic)):						                    #Converts techniques_used to list then sort it using swedish locale
         if len(unic[i]["techniques_used"]) > 0:                                                              
