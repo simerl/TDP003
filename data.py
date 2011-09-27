@@ -21,11 +21,9 @@ def init():
             row2[unicode(key, 'utf-8')] = unicode(value,'utf-8')	    #Puts the current row in the dict and converts it to unicode
         unic.append(row2)						                        #Adds the dict to the list "unic"
 
-    for i in range(len(unic)):						                    #Converts project_no back from unicode string to integer
-        unic[i]["project_no"] = int((unic[i]["project_no"]))
-
-    for i in range(len(unic)):						                    #Does the same with group_size
-        unic[i]["group_size"] = int((unic[i]["group_size"]))
+    for i in range(len(unic)):						                   
+        unic[i]["project_no"] = int((unic[i]["project_no"]))            #Converts project_no back from unicode string to integer
+        unic[i]["group_size"] = int((unic[i]["group_size"]))            #Does the same with group_size
     
     for i in range(len(unic)):						                    #Converts techniques_used to list then sort it using swedish locale
         if len(unic[i]["techniques_used"]) > 0:                                                              
@@ -36,10 +34,12 @@ def init():
             unic[i]["techniques_used"] = []
         
     errorcode = 0							                            #Changes the error code to "Ok"
+
     return unic								                            #Returns unic
 
 
 def project_count():
+
     return (errorcode, len(unic))										#Returns the error code and the length of unic as a tuple
 
 
@@ -48,21 +48,72 @@ def project_count():
 
 
 def lookup_project(a):                                                  #Måste ändra a till id, kanske
-    global unic
-    global errorcode
+
     for dic in unic:
     	if a == dic['project_no']:
 			return (errorcode, dic)
+
     return (2, None)
 
-def retrieve_project():#sort_by='start_date', sort_order='asc', techniques=None, search=None, search_fields=None):
-	global unic
-	global errorcode
+def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, search=None, search_fields=None):
 
+    sorted_list = []
+    tech_list = []
+    search_list = []
 
-#def retrieve_techniques():
+    if techniques:
+        for proj in unic:
+            for x in techniques:
+                if x in proj['techniques_used']:
+                    tech_list.append(proj)
 
+    else:
+        tech_list = unic
 
+    if search and search_fields:
+        search = unicode(search, 'utf-8')
+        search = search.lower()
+
+        for proj in tech_list:
+            for y in search_fields: 
+                search_list.append(proj[y])
+                        
+            for i in range(len(search_list)):
+                search_list[i] = unicode(search_list[i])
+            
+            search_list = [element.lower() for element in search_list]
+
+            for a in search_list:
+                if search in a:
+                    sorted_list.append(proj)
+
+            search_list = []
+
+    elif search_fields == []:
+        sorted_list = []    
+            
+    else:
+        sorted_list = tech_list
+
+    sorted_list = sorted(sorted_list, key=lambda k: k[sort_by])
+
+    if sort_order == 'desc':
+        sorted_list.reverse()
+
+    return (errorcode, sorted_list)
+
+def retrieve_techniques():
+
+    tech_list = []
+
+    for proj in unic:
+        for tech in proj['techniques_used']:
+            if tech not in tech_list:
+                tech_list.append(tech)
+
+    tech_list = sorted(tech_list)
+
+    return (errorcode, tech_list)
 
 #def retieve_techniques_stats():
 
