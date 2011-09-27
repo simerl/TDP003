@@ -59,29 +59,70 @@ def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, s
 
     sorted_list = []
     tech_list = []
+    search_list = []
 
     if techniques:
         for proj in unic:
-            if techniques in proj['techniques_used']:
-                sorted_list.append(proj)
+            for x in techniques:
+                if x in proj['techniques_used']:
+                    tech_list.append(proj)
     else:
         tech_list = unic
+#    -   -   -   -   -   -   -   
 
+    
+    
     if search and search_fields:
+        search = unicode(search, 'utf-8')
         for proj in tech_list:
-            if search in proj[search_fields]:
-                sorted_list.append(proj)
+            
+            for y in search_fields: 
+               # print sorted_list
+                search_list.append(proj[y])
+           
+            
+            
+            print search_list
+        #    print search in search_list
+            #print search_list
+            #sorted_list.append(proj)
+           # search_list = []
+            #sorted_list.append(proj)
+            #print type(search)
+            print type(search)
+            print type(search)
+            for i in range(len(search_list)):
+                search_list[i] = unicode(search_list[i])
+            print search in search_list
+            #print type(z)
+            for a in search_list:
+                print a
+                if search in a:
+                    sorted_list.append(proj)
+            search_list = []
+                    
+    else:
+        sorted_list = tech_list
 
     sorted_list = sorted(sorted_list, key=lambda k: k[sort_by])
 
     if sort_order == 'desc':
         sorted_list.reverse()
-
+    print len(sorted_list)
     return (errorcode, sorted_list)
 
-#def retrieve_techniques():
+def retrieve_techniques():
 
+    tech_list = []
 
+    for proj in unic:
+        for tech in proj['techniques_used']:
+            if tech not in tech_list:
+                tech_list.append(tech)
+
+    tech_list = sorted(tech_list)
+
+    return (errorcode, tech_list)
 
 #def retieve_techniques_stats():
 
