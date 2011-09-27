@@ -66,41 +66,32 @@ def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, s
             for x in techniques:
                 if x in proj['techniques_used']:
                     tech_list.append(proj)
+
     else:
         tech_list = unic
-#    -   -   -   -   -   -   -   
 
-    
-    
     if search and search_fields:
         search = unicode(search, 'utf-8')
+        search = search.lower()
+
         for proj in tech_list:
-            
             for y in search_fields: 
-               # print sorted_list
                 search_list.append(proj[y])
-           
-            
-            
-            print search_list
-        #    print search in search_list
-            #print search_list
-            #sorted_list.append(proj)
-           # search_list = []
-            #sorted_list.append(proj)
-            #print type(search)
-            print type(search)
-            print type(search)
+                        
             for i in range(len(search_list)):
                 search_list[i] = unicode(search_list[i])
-            print search in search_list
-            #print type(z)
+            
+            search_list = [element.lower() for element in search_list]
+
             for a in search_list:
-                print a
                 if search in a:
                     sorted_list.append(proj)
+
             search_list = []
-                    
+
+    elif search_fields == []:
+        sorted_list = []    
+            
     else:
         sorted_list = tech_list
 
@@ -108,7 +99,7 @@ def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, s
 
     if sort_order == 'desc':
         sorted_list.reverse()
-    print len(sorted_list)
+
     return (errorcode, sorted_list)
 
 def retrieve_techniques():
