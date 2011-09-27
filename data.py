@@ -34,10 +34,12 @@ def init():
             unic[i]["techniques_used"] = []
         
     errorcode = 0							                            #Changes the error code to "Ok"
+
     return unic								                            #Returns unic
 
 
 def project_count():
+
     return (errorcode, len(unic))										#Returns the error code and the length of unic as a tuple
 
 
@@ -46,17 +48,36 @@ def project_count():
 
 
 def lookup_project(a):                                                  #Måste ändra a till id, kanske
-    global unic
-    global errorcode
+
     for dic in unic:
     	if a == dic['project_no']:
 			return (errorcode, dic)
+
     return (2, None)
 
-def retrieve_project():#sort_by='start_date', sort_order='asc', techniques=None, search=None, search_fields=None):
-	global unic
-	global errorcode
+def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, search=None, search_fields=None):
 
+    sorted_list = []
+    tech_list = []
+
+    if techniques:
+        for proj in unic:
+            if techniques in proj['techniques_used']:
+                sorted_list.append(proj)
+    else:
+        tech_list = unic
+
+    if search and search_fields:
+        for proj in tech_list:
+            if search in proj[search_fields]:
+                sorted_list.append(proj)
+
+    sorted_list = sorted(sorted_list, key=lambda k: k[sort_by])
+
+    if sort_order == 'desc':
+        sorted_list.reverse()
+
+    return (errorcode, sorted_list)
 
 #def retrieve_techniques():
 
