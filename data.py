@@ -6,11 +6,12 @@ import csv
 import locale                                                           #Imports locale, will be used to sort lists containing unicode strings
 locale.setlocale(locale.LC_ALL, "sv_SE.UTF-8")                          #Sets locale to utf-8 swedish
 
-unic = []								                                #Creates a global list which will be used to store the lines of the csv file
+tech_list = []
+project_list = []								                                #Creates a global list which will be used to store the lines of the csv file
 errorcode = 1								                            #Sets the error code to "error accessing data file" because no data is loaded
 
 def init():
-    global unic
+    global project_list
     global errorcode
 
     csvReader = csv.DictReader(open('data.csv', 'rb'), delimiter=',')	#Reads from csv file
@@ -19,28 +20,28 @@ def init():
         row2 = {}							                            #Creates an empty dict
         for key, value in row.iteritems():
             row2[unicode(key, 'utf-8')] = unicode(value,'utf-8')	    #Puts the current row in the dict and converts it to unicode
-        unic.append(row2)						                        #Adds the dict to the list "unic"
+        project_list.append(row2)						                        #Adds the dict to the list "project_list"
 
-    for i in range(len(unic)):						                   
-        unic[i]["project_no"] = int((unic[i]["project_no"]))            #Converts project_no back from unicode string to integer
-        unic[i]["group_size"] = int((unic[i]["group_size"]))            #Does the same with group_size
+    for i in range(len(project_list)):						                   
+        project_list[i]["project_no"] = int((project_list[i]["project_no"]))            #Converts project_no back from unicode string to integer
+        project_list[i]["group_size"] = int((project_list[i]["group_size"]))            #Does the same with group_size
     
-    for i in range(len(unic)):						                    #Converts techniques_used to list then sort it using swedish locale
-        if len(unic[i]["techniques_used"]) > 0:                                                              
-            temp = unic[i]["techniques_used"]                        
-            unic[i]["techniques_used"] = temp.split(',')
-            unic[i]["techniques_used"] = sorted(unic[i]["techniques_used"], cmp=locale.strcoll)
+    for i in range(len(project_list)):						                    #Converts techniques_used to list then sort it using swedish locale
+        if len(project_list[i]["techniques_used"]) > 0:                                                              
+            temp = project_list[i]["techniques_used"]                        
+            project_list[i]["techniques_used"] = temp.split(',')
+            project_list[i]["techniques_used"] = sorted(project_list[i]["techniques_used"], cmp=locale.strcoll)
         else:
-            unic[i]["techniques_used"] = []
+            project_list[i]["techniques_used"] = []
         
     errorcode = 0							                            #Changes the error code to "Ok"
 
-    return unic								                            #Returns unic
+    return project_list								                            #Returns project_list
 
 
 def project_count():
 
-    return (errorcode, len(unic))										#Returns the error code and the length of unic as a tuple
+    return (errorcode, len(project_list))										#Returns the error code and the length of project_list as a tuple
 
 
 #The error codes are: 0 = Ok, 1 = error accessing data file and 2 = requested project does not exist.
@@ -49,9 +50,9 @@ def project_count():
 
 def lookup_project(a):                                                  #Måste ändra a till id, kanske
 
-    for dic in unic:
-    	if a == dic['project_no']:
-			return (errorcode, dic)
+    for proj in project_list:
+    	if a == proj['project_no']:
+			return (errorcode, proj)
 
     return (2, None)
 
@@ -62,13 +63,13 @@ def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, s
     search_list = []
 
     if techniques:
-        for proj in unic:
+        for proj in project_list:
             for x in techniques:
                 if x in proj['techniques_used']:
                     tech_list.append(proj)
 
     else:
-        tech_list = unic
+        tech_list = project_list
 
     if search and search_fields:
         search = unicode(search, 'utf-8')
@@ -103,18 +104,47 @@ def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, s
     return (errorcode, sorted_list)
 
 def retrieve_techniques():
+    create_tech_list()
 
-    tech_list = []
+    return (errorcode, tech_list)
 
-    for proj in unic:
+def create_tech_list():
+    global tech_list
+
+    for proj in project_list:
         for tech in proj['techniques_used']:
             if tech not in tech_list:
                 tech_list.append(tech)
 
     tech_list = sorted(tech_list)
+    return tech_list
 
-    return (errorcode, tech_list)
+def retrieve_technique_stats():
+    create_tech_list()
+    tech_list_all = []
+    tech_count = []
+    dict_keys = [u'count', u'name', u'projects', u'id', u'name']
+    tech_stats = []
+    projects = []
+    temp_projects = []
+    for proj in project_list:
+        for tech in proj['techniques_used']:
+            tech_list_all.append(tech)
 
-#def retieve_techniques_stats():
+    for tech in tech_list:
+        tech_count.append(tech_list_all.count(tech))
+        
+    for i in range(len(tech_list)):
+        for proj in project_list:
+            if tech_list[i] in proj['techniques_used']:
+                temp_projects.append({u'id':proj['project_no'], u'name':proj['project_name']})
+        temp_projects = sorted(temp_projects, key=lambda k: k['name'])       
+        if temp_projects:
+            projects.append(temp_projects)
+            temp_projects = []
+   
+    for i in range(len(tech_list)):
+        stats = dict(zip(dict_keys[0:3], [tech_count[i], tech_list[i], projects[i]]))
+        tech_stats.append(stats)        
 
-
+    return (errorcode, tech_stats)
