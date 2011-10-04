@@ -1,5 +1,40 @@
-.container{margin: 0 auto; border: 2px solid blue; }
-.header{margin: 0 auto; border: 2px solid yellow; }
-.menu{margin: 0 auto; border: 2px solid purple; }
-.content{margin: 0 auto; border: 2px solid red; }
-.footer{margin: 0 auto; border: 2px solid green; }
+.container {
+    border: 1px solid blue;
+    margin: 0 auto;
+    width: 960px;
+}
+.header {
+    border: 1px solid yellow;
+    height: 150px;
+    margin: 0 auto;
+    position: fixed;
+    top: 0;
+    width: 960px;
+}
+.space{
+    height: 190px;
+    background: green;
+}
+.menu {
+    border: 1px solid purple;
+    height: 40px;
+    margin: 0 auto;
+    position: fixed;
+    top: 150px;
+    width: 960px;
+}
+.content {
+    border: 1px solid red;
+    height: 1000px;
+    margin: 0 auto;
+    top: 190px;
+}
+.footer {
+    background: gray;
+    border: 0 none;
+    bottom: 0;
+    height: 40px;
+    margin: 0 auto;
+    position: fixed;
+    width: 960px;
+}
