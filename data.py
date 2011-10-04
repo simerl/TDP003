@@ -43,37 +43,32 @@ def project_count():
 
     return (errorcode, len(project_list))										#Returns the error code and the length of project_list as a tuple
 
+def lookup_project(a):                                                  
 
-#The error codes are: 0 = Ok, 1 = error accessing data file and 2 = requested project does not exist.
+    for proj in project_list:                                                   #Iterates through the list of projects.
+    	if a == proj['project_no']:                                             
+			return (errorcode, proj)                                            #If input matches project_no the project dict is returned 
 
-
-
-def lookup_project(a):                                                  #Måste ändra a till id, kanske
-
-    for proj in project_list:
-    	if a == proj['project_no']:
-			return (errorcode, proj)
-
-    return (2, None)
+    return (2, None)                                                            #If no project is found errorcode 2 is returned. 
 
 def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, search=None, search_fields=None):
 
-    sorted_list = []
+    sorted_list = []                                                            #Declares local variables
     tech_list = []
     search_list = []
 
-    if techniques:
+    if techniques:                                                              #Puts all the used techniques matching input in tech_list
         for proj in project_list:
             for x in techniques:
                 if x in proj['techniques_used']:
                     tech_list.append(proj)
 
-    else:
+    else:                                                                       #If no input, all techniques are added to tech_list
         tech_list = project_list
 
-    if search and search_fields:
-        search = unicode(search, 'utf-8')
-        search = search.lower()
+    if search and search_fields:                                                #Check search and search_fields input
+        search = unicode(search, 'utf-8')                                       #Converts search to unicode 
+        search = search.lower()                                                 #Converts to lower case, will make it easier to search
 
         for proj in tech_list:
             for y in search_fields: 
@@ -98,7 +93,7 @@ def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, s
 
     sorted_list = sorted(sorted_list, key=lambda k: k[sort_by])
 
-    if sort_order == 'desc':
+    if sort_order == 'desc':                                                    #Set sort order, asc or desc
         sorted_list.reverse()
 
     return (errorcode, sorted_list)
