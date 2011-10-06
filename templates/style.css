@@ -8,7 +8,7 @@ p{
 .container {
     border: 0px solid blue;
     margin: 0 auto;
-    width: 958px;
+    max-width: 958px;
     height: 100%;
 }
 .header {
@@ -41,7 +41,7 @@ p{
 .menu{
     border: 0px solid blue;
     margin: 0 auto;
-    width: 960px;
+    max-width: 960px;
     height: 100%;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff9900', endColorstr='#dd7700'); /* IE */
     background: -webkit-gradient(linear, left top, left bottom, from(#ff9900), to(#dd7700)); /* webkit */
@@ -68,8 +68,8 @@ p{
     margin: 0 auto;
     float: right;
     padding: 7px;
-    padding-left: 15px;
-    padding-right: 15px;
+    /*padding-left: 15px; */
+   /* padding-right: 15px;*/
  
     }
 .menu-button:hover {
@@ -87,8 +87,8 @@ p{
 }
 .content {
     background: #ccc;
-    border-left: 1px solid orange;
-    border-right: 1px solid orange;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
     height: 1000px;
     margin: 0 auto;
     top: 190px;
@@ -101,6 +101,6 @@ p{
     height: 150px;
     margin: 0 auto;
     width: 100%;
-    border-top: 2px solid orange;
+    border-top: 1px solid black;
 }
 
