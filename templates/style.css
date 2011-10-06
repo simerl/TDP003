@@ -1,40 +1,83 @@
+body{
+    background-image: url('../static/bg.jpg');
+    margin: 0 0 0 0;
+}
+p{
+    font-family: helvetica;
+}
 .container {
-    border: 1px solid blue;
+    border: 0px solid blue;
     margin: 0 auto;
-    width: 960px;
+    width: 958px;
+    height: 100%;
 }
 .header {
-    border: 1px solid yellow;
+    background: #555;
+    border: 0px solid yellow;
     height: 150px;
     margin: 0 auto;
-    position: fixed;
-    top: 0;
-    width: 960px;
+    border-bottom: 2px solid #ff9900;
+    border-top: 2px solid #dd7700;
+    width: 100%;
+
+    
+  
 }
-.space{
-    height: 190px;
-    background: green;
-}
-.menu {
-    border: 1px solid purple;
+.menu-container {
+    background: #333;
+    border: 0px solid purple;
     height: 40px;
     margin: 0 auto;
-    position: fixed;
     top: 150px;
+    width: 100%;
+}
+.menu{
+    border: 0px solid blue;
+    margin: 0 auto;
     width: 960px;
+    height: 100%;
+}
+.menu-button {
+    background: #ff9900;
+    border: 0px solid purple;
+    height: 40px;
+    margin: 0 auto;
+    width: 90px;
+    float: left;
+    border-right: 1px dotted #dd7700;
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff9900', endColorstr='#dd7700'); /* IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#ff9900), to(#dd7700)); /* webkit */
+    background: -moz-linear-gradient(top,  #ff9900,  #dd7700); /* firefox 3.6+ */ 
+}
+.menu-button:hover {
+    background: #dd7700;
+    border-right: 1px solid #dd7700;
+    height: 40px;
+    margin: 0 auto;
+    width: 90px;
+    float: left;
+
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffaa11', endColorstr='#ee8800'); /* IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffaa11), to(#ee8800)); /* webkit */
+    background: -moz-linear-gradient(top,  #ffaa11,  #ee8800); /* firefox 3.6+ */ 
+
 }
 .content {
-    border: 1px solid red;
+    background: #ccc;
+    border-left: 1px solid orange;
+    border-right: 1px solid orange;
     height: 1000px;
     margin: 0 auto;
     top: 190px;
 }
 .footer {
-    background: gray;
-    border: 0 none;
+    background: #555;
+    border: 0px solid black;
     bottom: 0;
-    height: 40px;
+    height: 150px;
     margin: 0 auto;
-    position: fixed;
-    width: 960px;
+    width: 100%;
+    border-top: 2px solid orange;
 }
+
