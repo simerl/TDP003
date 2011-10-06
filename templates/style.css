@@ -16,44 +16,66 @@ p{
     border: 0px solid yellow;
     height: 150px;
     margin: 0 auto;
-    border-bottom: 2px solid #ff9900;
-    border-top: 2px solid #dd7700;
+    border-bottom: 1px solid #000;
+    border-top: 1px solid #000;
     width: 100%;
+    padding-top: 50px;
 
     
   
 }
 .menu-container {
     background: #333;
-    border: 0px solid purple;
-    height: 40px;
+    height: 42px;
     margin: 0 auto;
     top: 150px;
     width: 100%;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#555555', endColorstr='#333333'); /* IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#333)); /* webkit */
+    background: -moz-linear-gradient(top,  #555,  #333); /* firefox 3.6+ */ 
+    border-bottom: 1px solid #000;
+    position: fixed;
+    top: 0px;
 }
+
 .menu{
     border: 0px solid blue;
     margin: 0 auto;
     width: 960px;
     height: 100%;
-}
-.menu-button {
-    background: #ff9900;
-    border: 0px solid purple;
-    height: 40px;
-    margin: 0 auto;
-    width: 90px;
-    float: left;
-    border-right: 1px dotted #dd7700;
-
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff9900', endColorstr='#dd7700'); /* IE */
     background: -webkit-gradient(linear, left top, left bottom, from(#ff9900), to(#dd7700)); /* webkit */
     background: -moz-linear-gradient(top,  #ff9900,  #dd7700); /* firefox 3.6+ */ 
 }
+.menu-button {
+
+    border: 0px solid purple;
+    height: 42px;
+    margin: 0 auto;
+    width: 90px;
+    float: left;
+    border-right: 1px dotted #dd7700;
+/*
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff9900', endColorstr='#dd7700'); 
+    background: -webkit-gradient(linear, left top, left bottom, from(#ff9900), to(#dd7700)); 
+    background: -moz-linear-gradient(top,  #ff9900,  #dd7700); 
+*/
+}
+
+.menu-search {
+    border: 0px solid purple;
+    height: 26px;
+    margin: 0 auto;
+    float: right;
+    padding: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
+ 
+    }
 .menu-button:hover {
     background: #dd7700;
     border-right: 1px solid #dd7700;
-    height: 40px;
+    height: 42px;
     margin: 0 auto;
     width: 90px;
     float: left;
@@ -70,6 +92,7 @@ p{
     height: 1000px;
     margin: 0 auto;
     top: 190px;
+    padding: 20px;
 }
 .footer {
     background: #555;
