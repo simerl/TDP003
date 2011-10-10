@@ -1,7 +1,7 @@
 {% extends "main.html" %}
 {% block content %}
     {% for proj in projects %}
-        {% for x in proj['course_id'] %}
+        {% for x in proj['project_name'] %}
             {% print x %}
         {% endfor %}
     {% endfor %}

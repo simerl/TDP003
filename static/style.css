@@ -5,6 +5,22 @@ body{
 p{
     font-family: helvetica;
 }
+
+.hej{
+    background: black;
+    width: 36px;
+    height: 36px;
+    float: right;
+    margin-right: 5px;
+    margin-top: 2px;
+    border: 1px solid black;
+    border-radius:6px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dd7700', endColorstr='#550000'); /* IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#dd7700), to(#500)); /* webkit */
+    background: -moz-linear-gradient(top,  #dd7700,  #500); /* firefox 3.6+ */ 
+
+}
+
 .container {
     border: 0px solid blue;
     margin: 0 auto;
