@@ -8,19 +8,28 @@
 <body> 
     <div class='menu-container'> 
         <div class='menu'> 
-            <div class='menu-button'> 
+            <div class='menu-button' style="cursor:pointer;" onclick="
+    location.href='/';"> 
                 <p>
-                    <a href="/" title="home">HOME</a>
+                    Main
                 </p>
             </div>
-            <div class='menu-button'> 
+            <div class='menu-button' style="cursor:pointer;" onclick="
+    location.href='/list';"> 
                 <p>
-                    <a href="/list" title="list">LIST</a>
+                    List
                 </p>
             </div>
-            <div class='menu-button'> 
+            <div class='menu-button' style="cursor:pointer;" onclick="
+    location.href='/techniques';"> 
                 <p>
-                    <a href="/techniques" title="techniques">TECHNIQUES</a>
+                    Techniques
+                </p>
+            </div>
+            <div class='menu-button' style="cursor:pointer;" onclick="
+    location.href='/search'"> 
+                <p>
+                    Advanced Search
                 </p>
             </div>
            
@@ -29,11 +38,7 @@
             
            
             <div class='menu-search'> 
-                 
-                    <form >
-                        <input type="text" name="search" /> <input type="submit" name="search-button" value="Search"/>
-                    </form>
-                
+                 {%block search%}{%endblock%}
             </div> 
 
         </div>

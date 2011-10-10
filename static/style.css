@@ -74,7 +74,8 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endC
     border: 0px solid purple;
     height: 42px;
     margin: 0 auto;
-    width: 90px;
+    width: 138px;
+   
     float: left;
     border-right: 1px dotted #dd7700;
 /*
@@ -99,7 +100,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endC
     border-right: 1px solid #dd7700;
     height: 42px;
     margin: 0 auto;
-    width: 90px;
+    /*width: 110px;*/
     float: left;
 
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffaa11', endColorstr='#ee8800'); /* IE */

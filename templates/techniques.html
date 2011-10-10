@@ -1,9 +1,12 @@
 {% extends "main.html" %}
 {% block content %}
-    {% for proj in projects %}
-        <h3><a href="/project/{{proj['project_no']}}"><img src="../static/{{proj['small_image']}}" />{{ proj['project_name'] }}</a></h3>
-            {{ proj['short_description']}}
-        
+    {% for tech in tech_stats %}  
+        <h3>{% print tech['name'] + " ", tech['count'] %}</h3>
+        <br /><ul>
+        {% for x in tech['projects'] %}
+            <li><a href="/project/{{ x['id'] }}"> {{ x['name'] }} </a></li>
+            <br />
+        {% endfor %}</ul>
     {% endfor %}
 {% endblock %}
 

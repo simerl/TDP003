@@ -1,0 +1,27 @@
+{% extends "main.html" %}
+{% block content %}
+<form action="/search" title="adv_search">
+<input id="adv_search" type="text" name="adv_search" /> <input type="submit" value="Search"  />
+<br />Techniques used:
+<input type="checkbox" />
+
+
+
+<br />Sort order: asc<input type="radio" />desc<input type="radio" />
+ <br />Sort by:    
+<select name="sort_by">
+        
+        <option value='start_date'>Start date</option>
+        <option value='end_date'>End date</option> 
+        <option value='project_no'>Project number</option>
+        <option value='project_name'>Project name</option>
+        <option value='course_id'>Course ID</option>
+       
+</select>
+    
+</form>
+<br />
+{{search}}
+<br /><br />
+
+{% endblock %}
