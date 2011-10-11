@@ -13,6 +13,7 @@ errorcode = 1								                            #Sets the error code to "error 
 def init():
     global project_list
     global errorcode
+    project_list = []
 
     csvReader = csv.DictReader(open('data.csv', 'rb'), delimiter=',')	#Reads from csv file
     
@@ -20,7 +21,8 @@ def init():
         row2 = {}							                            #Creates an empty dict
         for key, value in row.iteritems():
             row2[unicode(key, 'utf-8')] = unicode(value,'utf-8')	    #Puts the current row in the dict and converts it to unicode
-        project_list.append(row2)						                        #Adds the dict to the list "project_list"
+        if row2['project_name'] and row2['project_no']:
+            project_list.append(row2)						                        #Adds the dict to the list "project_list"
 
     for i in range(len(project_list)):						                   
         project_list[i]["project_no"] = int((project_list[i]["project_no"]))            #Converts project_no back from unicode string to integer
@@ -43,41 +45,41 @@ def project_count():
 
     return (errorcode, len(project_list))										#Returns the error code and the length of project_list as a tuple
 
+def lookup_project(a):                                                  
 
-#The error codes are: 0 = Ok, 1 = error accessing data file and 2 = requested project does not exist.
+    for proj in project_list:                                                   #Iterates through the list of projects.
+    	if a == proj['project_no']:                                             
+			return (errorcode, proj)                                            #If input matches project_no the project dict is returned 
 
-
-
-def lookup_project(a):                                                  #Måste ändra a till id, kanske
-
-    for proj in project_list:
-    	if a == proj['project_no']:
-			return (errorcode, proj)
-
-    return (2, None)
+    return (2, None)                                                            #If no project is found errorcode 2 is returned. 
 
 def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, search=None, search_fields=None):
 
-    sorted_list = []
+    sorted_list = []                                                            #Declares local variables
     tech_list = []
     search_list = []
 
-    if techniques:
+    if techniques:                                                              #Puts all the used techniques matching input in tech_list
         for proj in project_list:
             for x in techniques:
                 if x in proj['techniques_used']:
-                    tech_list.append(proj)
+                    
+                    if proj not in tech_list:                                   #kex for duplicates
+                        tech_list.append(proj)
 
-    else:
+    else:                                                                       #If no input, all techniques are added to tech_list
         tech_list = project_list
 
-    if search and search_fields:
-        search = unicode(search, 'utf-8')
-        search = search.lower()
-
+    if search and search_fields:                                                #Check search and search_fields input
+        search = unicode(search, 'utf-8')                                       #Converts search to unicode 
+        search = search.lower()                                                 #Converts to lower case, will make it easier to search
+        
         for proj in tech_list:
+            
             for y in search_fields: 
+               
                 search_list.append(proj[y])
+                
                         
             for i in range(len(search_list)):
                 search_list[i] = unicode(search_list[i])
@@ -85,9 +87,12 @@ def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, s
             search_list = [element.lower() for element in search_list]
 
             for a in search_list:
+                
                 if search in a:
+                    
+                                                    
                     sorted_list.append(proj)
-
+            
             search_list = []
 
     elif search_fields == []:
@@ -96,9 +101,11 @@ def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, s
     else:
         sorted_list = tech_list
 
+ 
+
     sorted_list = sorted(sorted_list, key=lambda k: k[sort_by])
 
-    if sort_order == 'desc':
+    if sort_order == 'desc':                                                    #Set sort order, asc or desc
         sorted_list.reverse()
 
     return (errorcode, sorted_list)

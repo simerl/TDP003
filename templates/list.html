@@ -1,0 +1,14 @@
+{% extends "main.html" %}
+{% block content %}
+    {% for proj in projects %}
+        <h3><a href="/project/{{proj['project_no']}}"><img src="../static/{{proj['small_image']}}" />{{ proj['project_name'] }}</a></h3>
+            {{ proj['short_description']}}
+        
+    {% endfor %}
+{% endblock %}
+
+{% block search %}
+                    <form action="/search" title="search" method="GET" >
+                        <input id="search" type="text" name="search" /> <input type="submit" value="Search"  />
+                    </form>
+{% endblock %}
