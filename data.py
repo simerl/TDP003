@@ -13,6 +13,7 @@ errorcode = 1								                            #Sets the error code to "error 
 def init():
     global project_list
     global errorcode
+    project_list = []
 
     csvReader = csv.DictReader(open('data.csv', 'rb'), delimiter=',')	#Reads from csv file
     
