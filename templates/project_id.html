@@ -1,6 +1,6 @@
 {% extends "main.html" %}
 {% block content %}
-
+{% if project %}
     
     <img src="../static/{{project['big_image']}}" />
     <h3>{{project['project_name']}}</h3>
@@ -16,10 +16,10 @@
   projektet pågick mellan   
 {{project['start_date']}} och 
 {{project['end_date']}}
+{%endif%}
+{% if error %}
+    {{error}}
+{%endif%}
 {% endblock %}
 
-{% block search %}
-                    <form action="/search" title="search" method="GET" >
-                        <input id="search" type="text" name="search" /> <input type="submit" value="Search"  />
-                    </form>
-{% endblock %}
+

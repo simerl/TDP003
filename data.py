@@ -20,7 +20,8 @@ def init():
         row2 = {}							                            #Creates an empty dict
         for key, value in row.iteritems():
             row2[unicode(key, 'utf-8')] = unicode(value,'utf-8')	    #Puts the current row in the dict and converts it to unicode
-        project_list.append(row2)						                        #Adds the dict to the list "project_list"
+        if row2['project_name'] and row2['project_no']:
+            project_list.append(row2)						                        #Adds the dict to the list "project_list"
 
     for i in range(len(project_list)):						                   
         project_list[i]["project_no"] = int((project_list[i]["project_no"]))            #Converts project_no back from unicode string to integer
@@ -61,7 +62,9 @@ def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, s
         for proj in project_list:
             for x in techniques:
                 if x in proj['techniques_used']:
-                    tech_list.append(proj)
+                    
+                    if proj not in tech_list:                                   #kex for duplicates
+                        tech_list.append(proj)
 
     else:                                                                       #If no input, all techniques are added to tech_list
         tech_list = project_list
@@ -69,10 +72,13 @@ def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, s
     if search and search_fields:                                                #Check search and search_fields input
         search = unicode(search, 'utf-8')                                       #Converts search to unicode 
         search = search.lower()                                                 #Converts to lower case, will make it easier to search
-
+        
         for proj in tech_list:
+            
             for y in search_fields: 
+               
                 search_list.append(proj[y])
+                
                         
             for i in range(len(search_list)):
                 search_list[i] = unicode(search_list[i])
@@ -80,9 +86,12 @@ def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, s
             search_list = [element.lower() for element in search_list]
 
             for a in search_list:
+                
                 if search in a:
+                    
+                                                    
                     sorted_list.append(proj)
-
+            
             search_list = []
 
     elif search_fields == []:
@@ -90,6 +99,8 @@ def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, s
             
     else:
         sorted_list = tech_list
+
+ 
 
     sorted_list = sorted(sorted_list, key=lambda k: k[sort_by])
 
