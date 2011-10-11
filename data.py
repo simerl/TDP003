@@ -117,30 +117,31 @@ def create_tech_list():
     return tech_list
 
 def retrieve_technique_stats():
-    create_tech_list()
-    tech_list_all = []
-    tech_count = []
-    dict_keys = [u'count', u'name', u'projects', u'id', u'name']
-    tech_stats = []
-    projects = []
-    temp_projects = []
-    for proj in project_list:
+    create_tech_list()			#Fetches the list of all techniques thought create_tech_list()
+    tech_list_all = []			#Keeps track of ALL occurrances of the techniques
+    tech_count = []			#Counts how many times each technique is found
+    dict_keys = [u'count', u'name', u'projects', u'id', u'name']	#Creates a list with the keys needed for the tech stats
+    tech_stats = []			#The list containing each dict for each technique
+    projects = []			#The list containing all the projects using the techniques
+    temp_projects = []			#List to save the projects containing a techniques
+    
+    for proj in project_list:			#Adds all occurances of the techniques to tech_list_all
         for tech in proj['techniques_used']:
             tech_list_all.append(tech)
 
-    for tech in tech_list:
+    for tech in tech_list:			#Counts the number of occurances of the techniques
         tech_count.append(tech_list_all.count(tech))
         
-    for i in range(len(tech_list)):
+    for i in range(len(tech_list)):			#Checks all the projects to see which techniques is being used
         for proj in project_list:
             if tech_list[i] in proj['techniques_used']:
-                temp_projects.append({u'id':proj['project_no'], u'name':proj['project_name']})
-        temp_projects = sorted(temp_projects, key=lambda k: k['name'])       
-        if temp_projects:
+                temp_projects.append({u'id':proj['project_no'], u'name':proj['project_name']})	#Adds it to a temporary list
+        temp_projects = sorted(temp_projects, key=lambda k: k['name'])		#Sorts it by name  
+        if temp_projects:		#if temp_projects exist, add it to projects
             projects.append(temp_projects)
-            temp_projects = []
+            temp_projects = []		#Clear the temporary list for the next technique
    
-    for i in range(len(tech_list)):
+    for i in range(len(tech_list)):		#Puts all the list together into a dict, and then adds it to the final list
         stats = dict(zip(dict_keys[0:3], [tech_count[i], tech_list[i], projects[i]]))
         tech_stats.append(stats)        
 
