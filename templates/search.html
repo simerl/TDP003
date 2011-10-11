@@ -1,0 +1,32 @@
+{% extends "main.html" %}
+{% block content %}
+<form action="/list" title="adv_search">
+<input id="adv_search" type="text" name="adv_search" /> <input type="submit" value="Search"  />
+<br />Techniques:
+{% for tech in tech_list %}
+{{ tech }}:<input type="checkbox" value="{{ tech }}" name="{{ tech }}"/>
+{% endfor %}
+<br />
+Search fields:
+Project name:<input type="checkbox" value="project_name" name="project_name" />
+Course name:<input type="checkbox" value="course_name" name="course_name" />
+
+<br />Sort order: asc<input name="sort_order" value="asc" type="radio" checked />desc<input name="sort_order" value="desc" type="radio" />
+
+<br />Sort by:    
+<select name="sort_by">
+        
+        <option value='start_date'>Start date</option>
+        <option value='end_date'>End date</option> 
+        <option value='project_no'>Project number</option>
+        <option value='project_name'>Project name</option>
+        <option value='course_id'>Course ID</option>
+       
+</select>
+    
+</form>
+<br />
+{%for proj in search%}
+<br />{{proj}}<br />
+{%endfor%}
+{% endblock %}
