@@ -1,6 +1,6 @@
-{% extends "main.html" %}
-{% block content %}
-{% if project %}
+{% extends "main.html" %}   <!-- extends the main template -->
+{% block content %}         <!-- this is the block which will be printed on the site -->
+{% if project %}            <!-- if a project was found, print information -->
     
     <img src="../static/{{project['big_image']}}" />
     <h3>{{project['project_name']}}</h3>
@@ -17,7 +17,7 @@
 {{project['start_date']}} och 
 {{project['end_date']}}
 {%endif%}
-{% if error %}
+{% if error %}          <!-- if error was found, print error -->
     {{error}}
 {%endif%}
 {% endblock %}
