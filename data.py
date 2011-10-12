@@ -78,10 +78,10 @@ def retrieve_projects(sort_by='start_date', sort_order='asc', techniques=None, s
             for y in search_fields: 
                 search_list.append(proj[y])
                      
-            for i in range(len(search_list)):			#JONATHAN
-                search_list[i] = unicode(search_list[i])	#JONATHAN IGEN, unicode encoding?
+            for i in range(len(search_list)):			#Encodes all the elements in search_list to unicode
+                search_list[i] = unicode(search_list[i])	
             
-            search_list = [element.lower() for element in search_list]	#JONATHAN IGEN IGEN
+            search_list = [element.lower() for element in search_list]	#Converts all elements to lowercase.
 
             for a in search_list:		#Checks if the search word is in search_list, the list with all found projects
                 if search in a:                               
