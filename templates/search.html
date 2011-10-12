@@ -26,7 +26,22 @@ Course name:<input type="checkbox" value="course_name" name="course_name" />
     
 </form>
 <br />
-{%for proj in search%}
-<br />{{proj}}<br />
-{%endfor%}
+    {%if search.__class__ == [].__class__%}
+
+        <table>
+        {%for proj in search%}
+            <tr>
+            <td><img src="../static/{{proj['small_image']}}" /></td><td><a href="/project/{{ proj['project_no'] }}">{{proj['project_name']}}</a></td><td>{{proj['project_no']}}</td><td>{{proj['start_date']}}</td><td>{{proj['end_date']}}</td><td>{{proj['course_id']}}</td>
+            </tr>
+
+
+
+
+
+        {%endfor%}
+        </table>
+    {%endif%}
+    {%if search.__class__ == "".__class__%}
+        {{search}}
+    {%endif%}
 {% endblock %}
