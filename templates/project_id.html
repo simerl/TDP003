@@ -1,0 +1,25 @@
+{% extends "main.html" %}   <!-- extends the main template -->
+{% block content %}         <!-- this is the block which will be printed on the site -->
+{% if project %}            <!-- if a project was found, print information -->
+    
+    <img src="../static/{{project['big_image']}}" style="width:400px;float:left;margin-right:10px;border-radius:50px;box-shadow:0px 0px 10px black;" />
+    <h3>{{project['project_name']}}</h3>
+   <p> {{project['long_description']}}</p>
+
+    <h4>Techniques used:</h4>
+<p>
+    {%for tech in project['techniques_used']%}
+        {{tech}}
+    {%endfor%}
+</p>
+<br />
+  Projektet pågick mellan   
+{{project['start_date']}} och 
+{{project['end_date']}}
+{%endif%}
+{% if error %}          <!-- if error was found, print error -->
+    {{error}}
+{%endif%}
+{% endblock %}
+
+

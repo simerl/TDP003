@@ -1,0 +1,60 @@
+{% extends "main.html" %}       <!-- extends the main template -->
+{% block content %}             <!-- this is the block which will be printed -->
+<form action="/list" title="adv_search">
+<div>
+<input id="adv_search" type="text" name="adv_search" /> <input type="submit" value="Search"  />
+</div>
+
+
+
+<div style="float: left;">
+Techniques:
+</div>
+{% for tech in tech_list %}     <!-- adds a checkbox for each technique in tech_list -->
+ <div style="float: left;">
+{{ tech }}:<input type="checkbox" value="{{ tech }}" name="{{ tech }}"/>
+</div>
+
+{% endfor %}
+<br />
+Search fields:
+Project name:<input type="checkbox" value="project_name" name="project_name" />
+Course name:<input type="checkbox" value="course_name" name="course_name" />
+
+<br />Sort order: asc<input name="sort_order" value="asc" type="radio" checked />desc<input name="sort_order" value="desc" type="radio" />
+
+<br />Sort by:    
+<select name="sort_by">
+        
+        <option value='start_date'>Start date</option>
+        <option value='end_date'>End date</option> 
+        <option value='project_no'>Project number</option>
+        <option value='project_name'>Project name</option>
+        <option value='course_id'>Course ID</option>
+       
+</select>
+    
+</form>
+<br />
+    {%if search.__class__ == [].__class__%}     <!-- checks if search is a list -->
+
+        <table>
+			<tr>
+			<td>Image</td><td>Project name</td><td>Project number</td><td>Start date</td><td>End date</td><td>Short Description</td>
+			</tr>
+		{%for proj in search%}    <!-- printing table with all the search results -->
+           
+	<tr>
+            <td><img src="../static/{{proj['small_image']}}" style="height:40px;width:40px;border-radius:5px;" /></td><td><a href="/project/{{ proj['project_no'] }}">{{proj['project_name']}}</a></td><td>{{proj['project_no']}}</td><td>{{proj['start_date']}}</td><td>{{proj['end_date']}}</td><td>{{proj['short_description']}}</td>
+            </tr>
+
+
+
+
+        {%endfor%}
+        </table>
+    {%endif%}
+    {%if search.__class__ == "".__class__%}     <!-- if search != list, print search (which in this case is an error message -->
+        {{search}}
+    {%endif%}
+{% endblock %}
