@@ -45,7 +45,7 @@ Course name:<input type="checkbox" value="course_name" name="course_name" />
 		{%for proj in search%}    <!-- printing table with all the search results -->
            
 	<tr>
-            <td><img src="../static/{{proj['small_image']}}" style="height:40px;width:40px;border-radius:5px;" /></td><td><a href="/project/{{ proj['project_no'] }}">{{proj['project_name']}}</a></td><td>{{proj['project_no']}}</td><td>{{proj['start_date']}}</td><td>{{proj['end_date']}}</td><td>{{proj['short_description']}}</td>
+            <td><img src="../static/{{proj['small_image']}}" alt="{{proj['small_image']}}" style="height:40px;width:40px;border-radius:5px;" /></td><td><a href="/project/{{ proj['project_no'] }}">{{proj['project_name']}}</a></td><td>{{proj['project_no']}}</td><td>{{proj['start_date']}}</td><td>{{proj['end_date']}}</td><td>{{proj['short_description']}}</td>
             </tr>
 
 

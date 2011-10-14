@@ -1,0 +1,14 @@
+{% extends "main.html" %}       <!-- extends the main template -->
+{% block content %}             <!-- this is the block which will be printed -->
+    {% for tech in tech_stats %}    <!-- iterates through tech_stats -->
+        <h3>{{tech['name']}}</h3> - Number of projects: {{tech['count']}}       <!-- prints the tech name and the number of projects using the techniques -->
+        <p></p>
+        <ul>
+        {% for x in tech['projects'] %}     <!-- prints the projects for each technique -->
+            <li><a href="/project/{{ x['id'] }}"> {{ x['name'] }} </a></li>
+            
+        {% endfor %}</ul>
+    {% endfor %}
+{% endblock %}
+
+

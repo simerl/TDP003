@@ -2,7 +2,7 @@
 {% block content %}         <!-- this is the block which will be printed on the site -->
 {% if project %}            <!-- if a project was found, print information -->
     
-    <img src="../static/{{project['big_image']}}" style="width:400px;float:left;margin-right:10px;border-radius:50px;box-shadow:0px 0px 10px black;" />
+    <img src="../static/{{project['big_image']}}" alt="{{project['big_image']}}" style="width:400px;float:left;margin-right:20px;border-radius:50px;box-shadow:0px 0px 10px black;" />
     <h3>{{project['project_name']}}</h3>
    <p> {{project['long_description']}}</p>
 
@@ -13,6 +13,7 @@
     {%endfor%}
 </p>
 <br />
+<p>
   Projektet pågick mellan   
 {{project['start_date']}} och 
 {{project['end_date']}}
@@ -20,6 +21,7 @@
 {% if error %}          <!-- if error was found, print error -->
     {{error}}
 {%endif%}
+</p>
 {% endblock %}
 
 
