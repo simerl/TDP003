@@ -35,11 +35,3 @@ FOLDER STRUCTURE:
       index.py
       *.py
 	  index.log
-
-ADD/EDIT PROJECTS:
-  To add or edit a project you have to edit the data.csv file. CSV means Comma Separated Values which means all
-  values in the file are separated by commas. The first line in the file indicates all the different fields that the
-  data layer can handle. Don't change this.
-
-  Thereafter comes the projects, one project on each line. Make sure to give the project a name and a number, else it
-  won't show on the website.
